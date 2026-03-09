@@ -1,0 +1,627 @@
+1) CREATE TABLE students(
+   student_id INT PRIMARY KEY AUTO_INCREMENT,
+   name VARCHAR(100) NOT NULL,
+   age INT
+);
+1.1) CREATE TABLE courses(
+     course_id INT PRIMARY KEY AUTO_INCREMENT,
+     course_name VARCHAR(100) NOT NULL
+);
+1.2) CREATE TABLE enrollments(
+     enrollment_id PRIMARY KEY AUTO_INCREMENT,
+     FOREIGN KEY(student_id) REFRENCES students(student_id)
+);
+
+2) INSERT INTO students(name,age)
+   ('Ahsan','20'),
+   ('Ali','20');
+
+2.1) SELECT * FROM students
+     ORDER BY age desc;
+
+3) if the value does not exit in the parent table,MYSQL will also check the enrollement table and also does not exit in enrollement table . if not exits in enrollement table that means fails for foreign key constrains. 
+   
+   
+4) The difference bewteen ASC means top level like i can say in own words like arranging numbers 1,2,3,4 and DESC order means not arranging number and 5,4,3,2,1. like this 
+
+1) CREATE TABLE departments(
+   dept_id PRIMARYKEY AUTO_INCREMENT,
+   dept_name VARCHAR(100) NOT NULL
+);
+1.1) CREATE TABLE employees(
+     emp_id PRIMARY KEY AUTO_INCREMENT,
+     name VARCHAR(100) NOT NULL,
+     salary DECIMAL(10,2),
+     dept_id INT,
+     FOREIGN KEY(dept_id)REFERENCES departments(dept_id)
+);
+2) INSERT INTO departments(dept_name)
+   VALUES
+   ('IT'),
+   ('HR');
+
+2.1) INSERT INTO employees(name,salery,dept_name)
+     VALUES
+    ('Ahsan','50000','IT'),
+    ('Ali','40000','IT'),
+    ('Sara','35000','HR'); 
+3) SELECT Count(*) FROM employees
+3.1) SELECT SUM(salary) FROM employees
+3.2) SELECT MAX(salary) FROM employees
+
+4) SELECT * FROM employees
+   ORDER BY salary desc;
+
+1) CREATE TABLE departments(
+   dept_id INT PRIMARY KEY AUTO_INCREMENT,
+   dept_name VARCHAR(100) NOT NULL
+);
+1.1) CREATE TABLE employees(
+     emp_id INT PRIMARY KEY AUTO_INCREMENT,
+     name VARCHAR(100) NOT NULL,
+     salary DECIMAL(10,2),
+     dept_id INT,
+     FOREIGN KEY(dept_id) REFERENCES departments(dept_id)
+);
+
+2) INSERT INTO departments(dept_name)
+   VALUES
+   ('IT'),
+   ('HR');
+2.1) INSERT INTO employees(Name,Salary,dept_id)
+     VALUES
+     ('Ahsan','50000','0145'),
+     ('Ali','40000','0789'),
+     ('Sara','35000','0999'),
+     ('Omar','30000','0789');
+3) SELECT Count(*) FROM employees
+3.1) SELECT SUM(salary) FROM employees
+3.2) SELECT AVG(salary) FROM employees
+3.3) SELECT MAX(salary) FROM employees
+
+4) SELECT * FROM employees
+   ORDER BY Salary desc;
+4.1) SELECT * FROM employees
+     ORDER BY Name asc;
+
+5) SELECT e.name d.dept_name
+   FROM employees e INNER JOIN department d ON e.Salary=d.dept_name
+5.1) SELECT d.dept_name SUM(e.Salary) AS total_Salary
+     FROM emloyees.e INNER JOIN department.d ON d.dept_id=e.dept_id
+     GROUP BY d.dept_name
+
+11) CREATE TABLE department(
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+12) SELECT name , salary FROM employees
+
+13) SELECT d.dept_name, SUM(e.salary) AS total_salary
+FROM employees e
+INNER JOIN department d 
+ON e.dept_id = d.dept_id
+GROUP BY d.dept_name;
+
+INNER JOIN: only matching data both table 
+LEFT JOIN/OUTER LEFT:show all data or records from left table like employees
+RIGHT JOIN: show all data or records from RIGHT table departements 
+FULL JOIN:show everything from both tables. 
+
+UPDATE:to update existing table
+       UPDATE employees
+       SET salary=7000
+       WHEERE emp_id=1;
+       
+       UPDATE employees
+       SET salary=7000,dept_id=30
+       WHERE name='Ahmed';
+UPADTE ALL employees
+       UPDATE employees
+       SET salary=salary+500; // add existing values
+
+DELETE:TO DELETE all recors from a table 
+
+        DELETE FROM employees
+        WHERE emp_id=3;
+        DELETE FROM employees
+        WHERE dept_id=10;
+        DELETE FROM employees
+DROP to delete whole data and not where bu in delete case remain table structure and where use it.
+
+
+1) CREATE TABLE departments(
+   dept_id INT PRIMARY KEY,
+   dept_name VARCHAR(50)
+);
+1.1) CREATE TABLE employees(
+     emp_id PRIMARY KEY,
+     name VARCHAR(50),
+     salary INT,
+     FOREIGN KEY(dept_id) REFERENCES departments(dept_id)
+);
+2) INSERT INTO departments(dept_id,dept_name)
+   VALUES
+   ('1','HR'),
+   ('2','IT'),
+   ('3','Sales');
+   INSERT INTO employees(emp_id,name,salary,dept_id)
+   VALUES
+   ('101','Ali','5000','1'),
+   ('102','Sara','6000','2'),
+   ('103','Ahmed','7000','3'),
+   ('104','John','8000','4'),
+   ('105','Maira','9000','5');
+2.1)SELECT * FROM employees
+    SELECT name,salary FROM employees
+    SELECT * FROM employees
+    WHERE salary > 50000;
+
+3) UPDATE employees
+   SET salary=salary+50000
+   
+   UPDATE employees
+   SET salary=salary+80000
+   WHERE emp_id=104;
+   
+   DELETE FROM employees
+   WHERE dept_id=2;
+
+   DELETE name FROM employees
+
+4) SELECT e.name,d.dept_name FROM 
+   employees e INNER JOIN departments d ON 
+   e.dept_id=d.dept_id
+4.1) SELECT * FROM employees e LEFT JOIN departments d
+     ON e.dept_id=d.dept_id
+
+4.2) SELECT d.dept_name,SUM(e.salary) AS total_Salary
+     FROM employees e INNER JOIN departments d ON
+     e.dept_id=d.dept_id GROUP BY d.dept_id
+4.3) SELECT d.dept_name MAX(e.salary) AS total_Salary
+     FROM employees e RIGHT JOIN departments d ON
+     e.dept_id=d.dept_id GROUP BY d.dept_id
+
+5) DROP TABLE employees;
+5.1) DROP TABLE departments
+5.2) i also know about delete to remove data that includes in table but remain structure and table remian.
+     and also drop to remove whole table that does not safe anything when we drop table.and also truncate works midlle man
+5.3) if you drop a table that has foreign key relation is destoring to another table. and also foreign key constrain error show. 
+ 
+     
+   
+SELECT d.dept_name, SUM(e.salary) AS total_salary
+FROM employees e
+INNER JOIN departments d
+ON e.dept_id = d.dept_id
+GROUP BY d.dept_name
+ORDER BY total_salary DESC
+LIMIT 1;
+
+SELECT e.name, d.dept_name
+FROM employees e
+LEFT JOIN departments d
+ON e.dept_id = d.dept_id;
+
+UPDATE employees
+SET salary = 80000
+WHERE emp_id = 104;
+
+SELECT d.dept_name,SUM(e.salary) AS total_salary
+FROM employees e INNER JOIN departments d ON
+e.dept_id=d.dept_id GROUP BY d.dept_id
+ORDER BY total_salary desc
+LIMIT 1;
+
+SELECT d.dept_name,MIN(e.salary) AS lowest_salary
+FROM employees e INNER JOIN departments d ON
+e.dept_id=d.dept_id
+GROUP BY d.dept_id;
+
+Group by is used to rows that have same values.
+and another words divided data into group and calculate each group. 
+
+LIMIT is restrict rows to return. 
+
+1) SELECT d.dept_name,SUM(e.salary) AS total_salary
+   FROM employees e INNER JOIN departments d ON
+   e.dept_id=d.dept_id GROUP BY d.dept_id;
+2) SELECT d.dept_name,SUM(e.salary) AS total_salary
+   FROM employees e INNER JOIN departments d ON
+   e.dept_id=d.dept_id GROUP BY d.dept_id ORDER BY total_salary DESC
+   LIMIT 2;
+
+SELECT *
+FROM employees
+ORDER BY salary DESC
+LIMIT 2;
+
+we used having function to filtered groupes. 
+and having function also used in aggregate function 
+count sum avg etc.
+
+SELECT dept_id,COUNT(emp_id) FROM employees
+GROUP BY dept_id
+HAVING COUNT(emp_id)>2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+for TEST only
+1) CREATE TABLE employees(
+   emp_id INT PRIMARY KEY,
+   emp_name VARCHAR(50),
+   FOREIGN_KEY(dept_id) REFERENCES departments(dept_id),
+   salary INT
+);
+1.1) INSERT INTO employees(emp_id,emp_name,dept_id,salary)
+     VALUES
+     ('1','Ahsan','0145','500'),
+     ('2','Ali','0146','600'),
+     ('3','Ahmed','0147','700'),
+     ('4','WAQAS','0148','800'),
+     ('5','Naim','0149','900');
+
+2) UPDATE employees
+   SET salary=salary+5000
+   WHERE emp_id=3;
+2.1) SELECT * FROM employees
+     ORDER BY salary desc
+     LIMIT 2;
+3) SELECT dept_id,SUM(salary) FROM employees
+   GROUP BY dept_id;
+4) SELECT dept_id, SUM(salary) AS total_salary
+   FROM employees
+   GROUP BY dept_id
+   HAVING SUM(salary) > 100000
+   ORDER BY total_salary DESC
+   LIMIT 1;
+4.1) SELECT dept_id, MAX(salary) AS max_salary
+     FROM employees
+     GROUP BY dept_id
+     HAVING MAX(salary) > 100000
+     ORDER BY max_salary DESC
+     LIMIT 1;
+
+// alter table is modifying and rename table structure whole.
+add column and remove column 
+1) ALTER TABLE students
+   ADD email VARCHAR(100);
+
+2) ALTER TABLE students
+   DROP COLUMN age;
+
+3) ALTER TABLE students
+   MODIFY marks BIGINT;
+
+4) ALTER TABLE students
+   RENAME COLUMN marks TO total_marks;
+
+
+
+
+
+
+
+
+1) CREATE TABLE employees(
+   emp_id INT PRIMARY KEY,
+   emp_name VARCHAR(100),
+   dept_id INT,
+   salary INT,
+   FOREIGN KEY(dept_id) REFERENCES departments(dept_id)
+);
+1.1) ALTER TABLE employees
+     ADD email VARCHAR(100);
+1.2) ALTER TABLE employees
+     MODIFY salary BIGINT;
+1.3) ALTER TABLE employees
+     RENAME COLUMN emp_name TO employees_name;
+
+2) INSERT INTO employees(emp_id,emp_name,dept_id,salary)
+     VALUES
+     INSERT INTO employees (emp_id, employee_name, dept_id, salary, email)
+VALUES
+(1,'Ahsan',101,50000,'ahsan@gmail.com'),
+(2,'Ali',102,60000,'ali@gmail.com'),
+(3,'Ahmed',101,70000,'ahmed@gmail.com'),
+(4,'Waqas',103,80000,'waqas@gmail.com'),
+(5,'Naim',102,90000,'naim@gmail.com'),
+(6,'Ahsaan',101,100000,'ahsaan@gmail.com');
+
+2.1) UPDATE employees
+     SET salary=salary+3000
+     WHERE dept_id=101;
+
+2.2) UPDATE employees
+     SET email='mahsanraza751@gmail.com'
+     WHERE emp_id=4;
+3) SELECT e.emp_name,d.dept_name , e.salary FROM employees e INNER
+   JOIN departments d ON e.dept_id=d.dept_id;
+3.1) SELECT e.emp_name,d.dept_name,e.salary FROM
+     employees e JOIN depratments d ON
+     e.dept_id=d.dept_id WHERE e.salary>50000;
+
+4) SELECT dept_id,SUM(salary) AS total_salary FROM employees
+   GROUP BY dept_id
+   HAVING SUM(salary)>150000
+   ORDER BY total_salary desc;
+
+5) SELECT d.dept_name,AVG(e.salary) AS avg_salary FROM employees e
+   JOIN departments d ON e.dept_id=d.dept_id
+   GROUP BY d.dept_name ORDER BY avg_salary desc
+   LIMIT 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) CREATE TABLE employees(
+   emp_id INT PRIMARY KEY,
+   emp_name VARCHAR(100),
+   dept_id INT,
+   salary INT,
+   hire_data DATE,
+);
+1.1) ALTER TABLE employees
+     ADD email VARCHAR(100);
+1.2) ALTER TABLE employees
+     MODIFY salary BIGINT;
+1.3) ALTER TABLE employees
+     RENAME COLUMN emp_name TO employee_name;
+1.4) ALTER TABLE employees
+     DROP COLUMN hire_date;
+
+2) INSERT INTO employees (emp_id, employee_name, dept_id, salary, hire_date, email)
+   VALUES
+   (1,'Ahsan',101,50000,20-01-26,'ahsan@gmail.com'),
+   (2,'Ali',102,60000,21-01-26,'ali@gmail.com'),
+   (3,'Ahmed',101,70000,22-01-26,'ahmed@gmail.com'),
+   (4,'Waqas',103,80000,23-01-26,'waqas@gmail.com'),
+   (5,'Naim',102,90000,24-01-26,'naim@gmail.com'),
+   (6,'Ahsaan',101,100000,25-01-26,'ahsaan@gmail.com'),
+   (7,'Naeem',104,1100000,26-01-26,'naeem@gmail.com'),
+   (8,'Ayan',101,1200000,27-01-26,'ayan@gmail.com');
+
+2.1) UPDATE employees
+     SET salary=salary+5000
+     WHERE dept_id=101;
+2.2) UPDATE employees
+     SET email='naim@gmail.com'
+     WHERE emp_id=5;
+2.3) DELETE FROM employees
+     WHERE salary<30000;
+
+3) SELECT e.employee_name,d.dept_name,e.salary FROM employees e
+   JOIN departments d ON e.dept_id=d.dept_id WHERE salary>50000 ORDER BY e.salary DESC;
+4) SELECT dept_id,SUM(e.salary) AS total_salary FROM 
+   employees e JOIN departmemts d ON e.dept_id=d.dept_id
+   GROUP BY d.dept_id HAVING SUM(e.salary) > 200000
+   ORDER BY total_salary DESC
+   LIMIT 1;
+
+
+5)   SELECT d.dept_name,AVG(e.salary) AS AVG_salary
+     FROM employees e JOIN departments d ON e.dept_id=d.dept_id
+     GROUP BY d.dept_name
+     HAVING AVG(e.salary) > 60000
+     ORDER BY avg_salary DESC
+     LIMIT 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1)CREATE TABLE staff(
+  staff_id INT PRIMARY KEY,
+  staff_name VARCHAR(100),
+  department_id INT,
+  salary INT,
+  joining_date DATE
+);
+1.1)ALTER TABLE staff
+    ADD COLUMN phone VARCHAR(15);
+1.2)ALTER TABLE staff
+    MODIFY salary BIGINT;
+1.3)ALTER TABLE staff
+    RENAME COLUMN staff_name TO employee_name;
+1.4)ALTER TABLE staff
+    DROP COLUMN joining_date;
+
+2) INSERT INTO staff(staff_id,staff_name,department_id,salary,joining_date)
+   VALUES
+   (1,'Ahmed',0145,10000,2022-01-10),// inverted comma in dates only 
+   (2,'Ahsan',0146,15000,2022-02-11),
+   (3,'Raza',0147,20000,2022-03-10),
+   (4,'Ali',0148,25000,2022-04-11),
+   (5,'Waqas',0149,30000,2022-05-10),
+   (6,'Ali',0150,40000,2022-06-11),
+   (7,'rehman',0151,45000,2022-06-22),
+   (8,'mubeen',0152,50000,2022-06-31),
+   (9,'abdullah',0153,55000,2022-07-10),
+   (10,'zafar',0154,60000,2022-07-21);
+
+2.1) UPDATE staff
+     SET salary=salary+4000
+     WHERE department_id=201;
+2.2) DELETE FROM staff
+     WHERE salary>25000;
+
+3) SELECT s.employee_name,d.department_name,s.salary FROM
+   staff s JOIN departments d ON s.department_id=d.department_id
+   WHERE salary>7000
+   ORDER BY salary desc;
+
+4) SELECT d.department_id,SUM(s.salary) AS total_salary
+   FROM staff s JOIN departments d ON s.department_id=d.department_id
+   GROUP BY d.department_id
+   HAVING SUM(s.salary)>300000
+   ORDER BY total_salary desc;
+   LIMI 1;
+5) SELECT d.department_name,AVG(s.salary) AS avg_salary
+   FROM staff s JOIN department d ON s.department_id=d.department_id
+   GROUP BY d.department_name
+   HAVING AVG(s.salary)>65000
+   ORDER BY avg_salary desc
+   LIMIT 2;
+
+Normalization: is the process to reduce redundency and also maintain tables.
+and organize data into tables properly.
+
+Normalization is divided into Three parts:
+1) 1NF: to remove multiple values from columns 
+2) 2NF: to remove partial dependency. the data is depends upons primary key
+3) 3NF: to remove transitive dependency. the columns a is depend colunms b and depend primary key.
+
+Student_ID	Student_Name	Courses    // 1nf
+1	         Ali	        DBMS                                SQL
+1	         Ali	        SQL
+2                Ahzad          SQA
+3	         Ahsan	        java
+4                Azhar          DBMS
+5                Noman          python
+
+Order_ID         Product_ID     Quantity
+101              P1             2
+102              P2             3
+103              P1             1
+
+                                  //2nf
+Product_ID       Product_Name
+P1               Laptop
+P2               Mouse
+P1               Laptop
+
+
+Employee_ID      Employee_Name     Department_ID
+1                Ali               D1
+2                Ahmed             D2
+3                Ahsan             D3
+
+Department_ID    Department_Name
+D1               HR                   3nf
+D2               IT
+D3               Finance 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) SELECT department_id,SUM(salary) AS total_salary
+   FROM employees GROUP BY department_id HAVING 
+   SUM(salary)>300000 ORDER BY total_salary desc
+   LIMIT 1;
+2) SELECT s.student_name,c.course_name FROM students s JOIN enrollments e 
+   ON s.student_id=e.student_id JOIN course c ON c.course_id=e.course_id;
+3) ALTER TABLE employees
+   ADD email VARCHAR(100);
+3.1) ALTER TABLE employees
+     MODIFY salary BIGINT;
+3.2) ALTER TABLE employees
+     DROP COLUMN phone_number;
+
+
+4) Order_ID	Customer_Name	Customer_City	
+   101		Ali             Lahore         	
+   102		Ahmed           Karachi	        
+   103		Abdullah        Jhelum          P3              Keyboard
+
+4.1) Order_ID   Product_ID	 Product_Name
+     101        P1	         Laptop
+     102	P2	         Mouse
+     103        P3               Keyboard
+
+5) White box testing:
+   is a testing technique to test internal code structure, and also check the code complexsity
+   and which programing tools we used in the code.now here below real life example.
+   e.g: A toyota car the auto engineer whose check the internal body of a car like engine. patroliuem system.
+   black box testing:
+   is a technique to test functional and non functional requirement and also check the software inputs and outputs
+   and also check the UI/UX design and proper framework of a system. like portfolio , about home page. 
+   and here is an example below:
+   e.g a toyota car whose boady is very attractive and tires,windows,speed, gearing system etc. 
+
+
+SDLC:
+1.Requirements Analysis // what need to be develop software.dicussion in clients and server
+2.planing // time resources and manage strategy to develop software on time,money,tools
+3.Design // is be design ui and database how is the architecture
+4.developement: we start coding python.java etc.
+5.deployments: the software is released and now start on server
+6.maintain: we updates and add new feature in existig.
+
+STLC:
+1.Requirement Analysis: // now we consider what need to be testing feature in software
+2.planing:startgey and which tool that we used in testing software
+3.Test-case developed: now we create test-case and check the actual and expect result 
+4.Testing Environment: and tester will also check the testing environment.like server,browser API
+5.extecute Test: is the propcess to find bugs when we test software.
+6.close test: test report is prepared.     
