@@ -624,4 +624,70 @@ STLC:
 3.Test-case developed: now we create test-case and check the actual and expect result 
 4.Testing Environment: and tester will also check the testing environment.like server,browser API
 5.extecute Test: is the propcess to find bugs when we test software.
-6.close test: test report is prepared.     
+6.close test: test report is prepared.   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) SELECT department_id,SUM(salary) AS total_salary
+   FROM employees GROUP BY department_id HAVING SUM(salary)>200000
+   ORDER BY total_salary desc;
+
+2) SELECT s.student_name, c.course_name
+   FROM students s
+   JOIN enrollments e ON s.student_id = e.student_id
+   JOIN courses c ON e.course_id = c.course_id;
+3)ALTER TABLE staff
+  ADD email VARCHAR(100);
+
+3.1)ALTER TABLE staff
+    MODIFY salary BIGINT;
+3.2)ALTER TABLE staff
+    DROP COLUMN joining_date;
+
+4) 1) user deposit money in ATM machine 
+   2) USER withraw amount from atm machine with vaild username and password
+   3) USER widthraw amount from atm machine with invalid username and password
+   4) user widthraw amount with incorrect username and valid password
+   5) user widthraw amount with empty username and valid password
+
+5) Field              Description
+   Test_case id       TC_01
+   Test_senario       user enter vaild credentails in website to register page
+   Test_steps         enter username,email,password,click register button
+   Test_data          ahsan/mahsan@33.com/12345
+   Expected_result    we should enter vaild credetials and click register button . the message appear successfull
+   Actual_result      registeration has been successfull
+   status             pass
+
+6) if(username == database_username && password == database_password)
+{
+   login_success();
+}
+else
+{
+   show_error();
+} The condition is saying if username match from database username then condition is correct and as same for password.
+  and loops are accurate when boths username and password is correct the till login successfull 
+  and else loops is executed then till faild both conditions.
+
+
+   
