@@ -742,4 +742,48 @@ else
    is a technique to check functional and non functional of a software. with the help of examples
    as you know when we login any username and password. we checked the proper frame of login and check the useablity of a system without seeing the code.
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) Student_ID	Student_Name		
+   1		 Ali              	         
+   2		 Ahmed         	          
+   3		 Ali           	      
+                                           // 3NF
+ Course_ID       Course_Name    Instructor
+  C1             DBMS	        Dr. Khan
+  C2             SQA	        Dr. Ali
+  C3             SQL	        Dr. Khan
+
+
+Order_ID	Product_ID      Quantity
+101	        P1		        2
+101	        P2		        1
+102	        P1		        3
+                                          2NF
+Product_ID	Product_Name   
+P1              Laptop
+P2              Mouse
+P3             computer
