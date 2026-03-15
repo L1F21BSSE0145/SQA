@@ -786,4 +786,41 @@ Order_ID	Product_ID      Quantity
 Product_ID	Product_Name   
 P1              Laptop
 P2              Mouse
-P3             computer
+P3              computer
+
+
+
+
+
+1) | Student_ID | Student_Name | Courses     |
+| ---------- | ------------ | ----------- |
+| 1          | Ali          | DBMS
+  1            Ali            SQL   
+| 2          | Ahmed        | Java        |  // This is first normal form and also automic values
+| 3          | Ahsan        | Python
+  3            Ahsan          SQA 
+
+2) Product_ID     Product_Name
+   P1             Laptop
+   P2             Mouse
+   P3             Keyboard               // This is second normal form and also data depend upon whole primary key 
+
+2.1) Order_id     Product_id   Quantity
+     101          P1           2
+     102          P2           1
+     102          P3           3
+
+3) Department_ID   Department_Name
+   D1              HR
+   D2              IT
+   D1              BBA
+
+                                                           // This is thrid normal form A column depends on Columns b and depend primary key .This transactive depandency
+3.1) Employee_ID    Employee_Name      Deapartment_ID
+     1              Ali                D1
+     2              Ahmed              D2
+     3              Ahsan              D3
+
+
+
+
