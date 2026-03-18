@@ -822,5 +822,22 @@ P3              computer
      3              Ahsan              D3
 
 
+types of tesing 
+
+i) unit testing
+ii) integration testing  // incremental(easy) and big ban approches (once time test)
+iii) system testing (client requiremnets)
+
+incremental (top down and bottom up approach)
+
+
+
+
+1) SELECT DISTINCT department FROM employees
+
+2) SELECT DISTINCT student_name,course FROM students
+   ORDER BY student_name;
+
+
 
 
