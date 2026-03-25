@@ -831,12 +831,96 @@ iii) system testing (client requiremnets)
 incremental (top down and bottom up approach)
 
 
+LIKE operator in SQL:
+
+% use for any numbers of character 0,1,2 
+
+LIKE operator in SQL:
+
+_ use for single character 
+
 
 
 1) SELECT DISTINCT department FROM employees
 
 2) SELECT DISTINCT student_name,course FROM students
-   ORDER BY student_name;
+   ORDER BY course;
+
+3) SELECT * FROM customers WHERE customer_name LIKE 'A%n';
+
+
+
+Jira is software management tool. is used to manage projects like how can pl project and configrate project design
+Releasing project . in real time efforts. 
+
+SPRINT,EPIC,STORY,etc.
+Jira server(its own your server already your own teams),jira cloud(no need to cost of server,no need to time to time updated)
+Epic (create software modules or groups)
+Backlog(short time period) 15 or 17 days work
+
+Selenium is a open source free plateform is used to perform autmation testing
+There are four components:
+selenium ide ,selenium rc , webdriver, selenium grid 
+
+There are some feature:
+flexsible and mulitple browser are used and also multipl languages supported.
+
+
+
+CREATE TABLE employees(
+employee_id INT PRIMARY KEY,
+employee_name VARCHAR(100),
+department_id INT,
+salary INT,
+email VARCHAR(100),
+FOREIGN KEY(department_id) REFERENCES departments(department_id)
+);
+
+INSERT INTO employees(employees_id,employees_name,department_id,salary,email)
+VALUES
+('0145','Ahsan','12',54000.'mahsanraza751@gmail.com'),
+('0147','Ali','13',56000.'mahsanraza752@gmail.com'),
+('0148','Azhar','14',57000.'mahsanraza753@gmail.com'),
+('0149','Azhmat','15',58000.'mahsanraza754@gmail.com'),
+('0150','Aziz','16',59000.'mahsanraza756@gmail.com');
+
+
+UPDATE employees
+SET salary=salary+5000
+WHERE department_id='105;
+
+SELECT DISTINCT department_id FROM employees
+ORDER BY department_id desc;
+
+SELECT * FROM employees
+WHERE employee_name LIKE 'a%n';
+
+
+SELECT department_id,SUM(salary) AS total_salary
+FROM employees
+GROUP BY department_id
+HAVING SUM(salary)>200000
+ORDER BY total_salary desc
+LIMIT 1;
+
+SELECT e.employee_name,e.department_name,e.salary FROM employees e JOIN departments d ON 
+e.department_id=d.department_id=;
+
+SELECT *
+FROM employees
+WHERE employee_name LIKE '%a%'
+ORDER BY salary desc
+LIMIT 2;
+
+
+
+
+
+
+
+
+
+
 
 
 
